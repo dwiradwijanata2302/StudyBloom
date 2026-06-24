@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.StudyBloom.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_md">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_lg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Icon status topic -->
+            <ImageView
+                android:id="@+id/ivTopicStatus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:src="@drawable/ic_topic_not_started"
+                android:contentDescription="Topic Status" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTopicName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.StudyBloom.Title"
+                    android:text="Topic Name" />
+
+                <TextView
+                    android:id="@+id/tvTopicStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:background="@drawable/bg_chip_primary"
+                    android:paddingHorizontal="@dimen/spacing_sm"
+                    android:paddingVertical="2dp"
+                    android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                    android:text="Not Started" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTopicDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                android:text="0m" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressTopic"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/progress_bar_height"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:progressDrawable="@drawable/progress_bar_drawable"
+            android:max="100"
+            android:progress="0" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

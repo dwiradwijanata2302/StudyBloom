@@ -1,0 +1,37 @@
+<!-- res/values/dimens.xml -->
+<resources>
+
+    <!-- Spacing base -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+    <dimen name="spacing_2xl">24dp</dimen>
+    <dimen name="spacing_3xl">32dp</dimen>
+
+    <!-- Margin/Padding layar (horizontal kiri-kanan) -->
+    <dimen name="screen_margin_horizontal">20dp</dimen>
+
+    <!-- Corner radius -->
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">16dp</dimen>
+    <dimen name="radius_lg">24dp</dimen>
+    <dimen name="radius_xl">32dp</dimen>
+
+    <!-- Tinggi tombol -->
+    <dimen name="button_height">52dp</dimen>
+
+    <!-- Tinggi icon circle (badge icon di dashboard) -->
+    <dimen name="icon_circle_size">48dp</dimen>
+
+    <!-- Ukuran FAB (tombol + di pojok kanan bawah) -->
+    <dimen name="fab_size">56dp</dimen>
+
+    <!-- Tinggi Progress Bar -->
+    <dimen name="progress_bar_height">6dp</dimen>
+
+    <!-- Timer circle (layar Pomodoro) -->
+    <dimen name="timer_circle_size">240dp</dimen>
+
+</resources>

@@ -1,0 +1,45 @@
+<!-- res/values/colors.xml -->
+<resources>
+
+    <!-- Primary: Maroon -->
+    <color name="primary">#7A0C2E</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#FFD9E2</color>
+    <color name="on_primary_container">#3E0015</color>
+
+    <!-- Secondary: Dusty Rose -->
+    <color name="secondary">#9C4A5A</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#FFD9E0</color>
+    <color name="on_secondary_container">#3F0019</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#FFF8F8</color>
+    <color name="on_background">#1A1A1A</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#1A1A1A</color>
+    <color name="surface_variant">#F5E0E4</color>
+    <color name="on_surface_variant">#524347</color>
+
+    <!-- Outline -->
+    <color name="outline">#857375</color>
+    <color name="outline_variant">#D9C2C5</color>
+
+    <!-- Error -->
+    <color name="error">#BA1A1A</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="error_container">#FFDAD6</color>
+    <color name="on_error_container">#410002</color>
+
+    <!-- Utility -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Streak / Highlight -->
+    <color name="streak_orange">#FF6B35</color>
+
+    <!-- Progress bar track (background track) -->
+    <color name="progress_track">#F0D0D5</color>
+
+</resources>
