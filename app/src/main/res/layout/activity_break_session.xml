@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/screen_margin_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:textAppearance="@style/TextAppearance.StudyBloom.Headline"
+        android:text="Take a Break!" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_3xl"
+        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+        android:gravity="center"
+        android:text="You've done great. Rest for 5 minutes." />
+
+    <!-- Timer Circle -->
+    <FrameLayout
+        android:layout_width="@dimen/timer_circle_size"
+        android:layout_height="@dimen/timer_circle_size"
+        android:layout_marginBottom="@dimen/spacing_3xl">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/spacing_md"
+            style="@style/Widget.StudyBloom.Card.Large"
+            app:strokeWidth="4dp"
+            app:strokeColor="@color/secondary"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.StudyBloom.Timer"
+                    android:text="05:00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                    android:text="BREAK" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnContinueSession"
+        style="@style/Widget.StudyBloom.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="Continue Session" />
+
+    <Button
+        android:id="@+id/btnEndSession"
+        style="@style/Widget.StudyBloom.Button.Outline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="End Session" />
+
+</LinearLayout>

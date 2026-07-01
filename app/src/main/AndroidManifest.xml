@@ -24,6 +24,9 @@
         <activity android:name=".ui.subject.SubjectFormActivity" />
         <activity android:name=".ui.topic.TopicActivity" />
         <activity android:name=".ui.topic.TopicFormActivity" />
+        <activity android:name=".ui.session.StudySessionActivity" />
+        <activity android:name=".ui.session.BreakSessionActivity" />
+        <activity android:name=".ui.statistics.StatisticsActivity" />
     </application>
 
 </manifest>

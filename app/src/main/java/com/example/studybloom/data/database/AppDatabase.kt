@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.studybloom.data.dao.StreakDao
 import com.example.studybloom.data.dao.StudySessionDao
 import com.example.studybloom.data.dao.SubjectDao
 import com.example.studybloom.data.dao.TopicDao
@@ -21,6 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectDao
     abstract fun topicDao(): TopicDao
     abstract fun studySessionDao(): StudySessionDao
+    abstract fun streakDao(): StreakDao
 
     companion object {
         @Volatile
