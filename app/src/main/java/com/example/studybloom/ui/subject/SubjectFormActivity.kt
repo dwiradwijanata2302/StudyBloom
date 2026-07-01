@@ -1,6 +1,10 @@
 package com.example.studybloom.ui.subject
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +15,6 @@ import com.example.studybloom.viewmodel.SubjectViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 
 class SubjectFormActivity : AppCompatActivity() {
 
@@ -37,7 +38,9 @@ class SubjectFormActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Bind views
         tvFormTitle = findViewById(R.id.tvFormTitle)
@@ -103,24 +106,29 @@ class SubjectFormActivity : AppCompatActivity() {
         }
         tilSubjectName.error = null
 
-        if (subjectId != -1) {
-            // Mode Edit → update
-            val updatedSubject = Subject(
-                id = subjectId,
-                name = name,
-                description = description
-            )
-            subjectViewModel.update(updatedSubject)
-        } else {
-            // Mode Tambah → insert
-            val newSubject = Subject(
-                name = name,
-                description = description
-            )
-            subjectViewModel.insert(newSubject)
+        try {
+            if (subjectId != -1) {
+                // Mode Edit → update
+                val updatedSubject = Subject(
+                    id = subjectId,
+                    name = name,
+                    description = description
+                )
+                subjectViewModel.update(updatedSubject)
+                Toast.makeText(this, "Subject updated successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                // Mode Tambah → insert
+                val newSubject = Subject(
+                    name = name,
+                    description = description
+                )
+                subjectViewModel.insert(newSubject)
+                Toast.makeText(this, "Subject created successfully", Toast.LENGTH_SHORT).show()
+            }
+            finish()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error saving subject. Please try again.", Toast.LENGTH_SHORT).show()
         }
-
-        finish()
     }
 
     private fun showDeleteConfirmation() {
@@ -135,5 +143,9 @@ class SubjectFormActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

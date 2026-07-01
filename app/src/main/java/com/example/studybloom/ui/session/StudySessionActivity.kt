@@ -101,12 +101,17 @@ class StudySessionActivity : AppCompatActivity() {
             sessionDate = today,
             duration = 25
         )
-        sessionViewModel.insert(session)
 
-        // UPDATE STREAK setelah session saved
-        StreakCalculator.updateStreak(this)
+        try {
+            sessionViewModel.insert(session)
 
-        Toast.makeText(this, "Session completed! Take a break.", Toast.LENGTH_SHORT).show()
+            // UPDATE STREAK setelah session saved
+            StreakCalculator.updateStreak(this)
+
+            Toast.makeText(this, "Session completed! Take a break.", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Failed to save session. Please try again.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun goToBreakSession() {

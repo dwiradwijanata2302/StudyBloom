@@ -26,7 +26,9 @@ class StatisticsActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Bind views
         tvTotalStudyTime = findViewById(R.id.tvTotalStudyTime)
@@ -73,5 +75,9 @@ class StatisticsActivity : AppCompatActivity() {
         statisticsViewModel.weeklyData.observe(this) { weeklyMap ->
             // Bisa digunakan untuk chart nanti
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

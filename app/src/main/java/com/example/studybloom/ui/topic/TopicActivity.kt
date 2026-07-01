@@ -2,6 +2,7 @@ package com.example.studybloom.ui.topic
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -39,7 +40,9 @@ class TopicActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = subjectName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Setup adapter
         adapter = TopicAdapter(
@@ -71,32 +74,44 @@ class TopicActivity : AppCompatActivity() {
 
         // Observe topics
         topicViewModel.topics.observe(this) { topics ->
-            adapter.updateList(topics)
+            val tvEmptyState = findViewById<TextView>(R.id.tvEmptyState)
+            if (topics.isEmpty()) {
+                rvTopics.visibility = View.GONE
+                tvEmptyState.visibility = View.VISIBLE
 
-            // Update card progress atas
-            val total = topics.size
-            val completed = topics.count { it.completed }
-            val percent = if (total > 0) (completed * 100 / total) else 0
+                // Reset progress indicators
+                findViewById<TextView>(R.id.tvTotalTopics).text = "0 Topics"
+                findViewById<ProgressBar>(R.id.progressCourse).progress = 0
+                findViewById<TextView>(R.id.tvProgressPercent).text = "0% Completed"
+            } else {
+                rvTopics.visibility = View.VISIBLE
+                tvEmptyState.visibility = View.GONE
+                adapter.updateList(topics)
 
-            findViewById<TextView>(R.id.tvTotalTopics).text = "$total Topics"
-            findViewById<ProgressBar>(R.id.progressCourse).progress = percent
-            findViewById<TextView>(R.id.tvProgressPercent).text = "$percent% Completed"
+                // Update card progress atas
+                val total = topics.size
+                val completed = topics.count { it.completed }
+                val percent = if (total > 0) (completed * 100 / total) else 0
 
-            // Hitung durasi tiap topic
-            lifecycleScope.launch {
-                val durationMap = mutableMapOf<Int, Int>()
-                topics.forEach { topic ->
-                    val sessions = sessionViewModel.getSessionsByDate("")
-                    // Hitung total durasi per topic dari semua session
-                    var totalDuration = 0
-                    sessionViewModel.allSessions.value?.forEach { session ->
-                        if (session.topicId == topic.id) {
-                            totalDuration += session.duration
+                findViewById<TextView>(R.id.tvTotalTopics).text = "$total Topics"
+                findViewById<ProgressBar>(R.id.progressCourse).progress = percent
+                findViewById<TextView>(R.id.tvProgressPercent).text = "$percent% Completed"
+
+                // Hitung durasi tiap topic
+                lifecycleScope.launch {
+                    val durationMap = mutableMapOf<Int, Int>()
+                    topics.forEach { topic ->
+                        // Hitung total durasi per topic dari semua session
+                        var totalDuration = 0
+                        sessionViewModel.allSessions.value?.forEach { session ->
+                            if (session.topicId == topic.id) {
+                                totalDuration += session.duration
+                            }
                         }
+                        durationMap[topic.id] = totalDuration
                     }
-                    durationMap[topic.id] = totalDuration
+                    adapter.updateDurationMap(durationMap)
                 }
-                adapter.updateDurationMap(durationMap)
             }
         }
 
@@ -107,5 +122,9 @@ class TopicActivity : AppCompatActivity() {
             intent.putExtra("SUBJECT_ID", subjectId)
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

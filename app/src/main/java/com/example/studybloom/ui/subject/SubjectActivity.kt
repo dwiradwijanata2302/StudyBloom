@@ -2,6 +2,8 @@ package com.example.studybloom.ui.subject
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +30,9 @@ class SubjectActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Setup RecyclerView
         adapter = SubjectAdapter(emptyList()) { subject ->
@@ -40,22 +44,30 @@ class SubjectActivity : AppCompatActivity() {
         }
 
         val rvSubjects = findViewById<RecyclerView>(R.id.rvSubjects)
+        val tvEmptyState = findViewById<TextView>(R.id.tvEmptyState)
         rvSubjects.layoutManager = LinearLayoutManager(this)
         rvSubjects.adapter = adapter
 
         // Observe data subject dari ViewModel
         subjectViewModel.allSubjects.observe(this) { subjects ->
-            adapter.updateList(subjects)
+            if (subjects.isEmpty()) {
+                rvSubjects.visibility = View.GONE
+                tvEmptyState.visibility = View.VISIBLE
+            } else {
+                rvSubjects.visibility = View.VISIBLE
+                tvEmptyState.visibility = View.GONE
+                adapter.updateList(subjects)
 
-            // Setelah dapat list subject, hitung progress tiap subject
-            lifecycleScope.launch {
-                val progressMap = mutableMapOf<Int, Pair<Int, Int>>()
-                subjects.forEach { subject ->
-                    val total = topicViewModel.getTotalTopics(subject.id)
-                    val completed = topicViewModel.getCompletedTopics(subject.id)
-                    progressMap[subject.id] = Pair(completed, total)
+                // Setelah dapat list subject, hitung progress tiap subject
+                lifecycleScope.launch {
+                    val progressMap = mutableMapOf<Int, Pair<Int, Int>>()
+                    subjects.forEach { subject ->
+                        val total = topicViewModel.getTotalTopics(subject.id)
+                        val completed = topicViewModel.getCompletedTopics(subject.id)
+                        progressMap[subject.id] = Pair(completed, total)
+                    }
+                    adapter.updateProgress(progressMap)
                 }
-                adapter.updateProgress(progressMap)
             }
         }
 
@@ -65,5 +77,9 @@ class SubjectActivity : AppCompatActivity() {
             val intent = Intent(this, SubjectFormActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

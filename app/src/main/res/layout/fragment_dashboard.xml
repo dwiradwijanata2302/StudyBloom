@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal"
+        android:paddingTop="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_xl">
+
+        <!-- Greeting -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/spacing_2xl">
+
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.StudyBloom.Headline"
+                android:text="Good Morning!" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                android:text="Ready to grow your knowledge today?" />
+
+        </LinearLayout>
+
+        <!-- Stats Grid (2x2) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_lg">
+
+            <!-- Day Streak -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.StudyBloom.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_sm">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_lg"
+                    android:gravity="center">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/icon_circle_size"
+                        android:layout_height="@dimen/icon_circle_size"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        style="@style/Widget.StudyBloom.Card"
+                        app:cardBackgroundColor="@color/primary_container">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="🔥"
+                            android:textSize="24sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvDayStreak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Stat"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                        android:text="DAY STREAK" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Study Time -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.StudyBloom.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_sm">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_lg"
+                    android:gravity="center">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/icon_circle_size"
+                        android:layout_height="@dimen/icon_circle_size"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        style="@style/Widget.StudyBloom.Card"
+                        app:cardBackgroundColor="@color/secondary_container">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="⏱️"
+                            android:textSize="20sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvStudyTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Stat"
+                        android:text="0h" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                        android:text="STUDY TIME" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Bottom row: Topics Done, Sessions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_2xl">
+
+            <!-- Topics Done -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.StudyBloom.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_sm">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_lg"
+                    android:gravity="center">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/icon_circle_size"
+                        android:layout_height="@dimen/icon_circle_size"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        style="@style/Widget.StudyBloom.Card"
+                        app:cardBackgroundColor="@color/primary_container">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="✓"
+                            android:textColor="@color/primary"
+                            android:textSize="20sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvTopicsDone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Stat"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                        android:text="TOPICS DONE" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sessions -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.StudyBloom.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_sm">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_lg"
+                    android:gravity="center">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/icon_circle_size"
+                        android:layout_height="@dimen/icon_circle_size"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        style="@style/Widget.StudyBloom.Card"
+                        app:cardBackgroundColor="@color/secondary_container">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="🎯"
+                            android:textSize="20sp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvSessions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Stat"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                        android:text="SESSIONS" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Continue Learning Card -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:textAppearance="@style/TextAppearance.StudyBloom.Title"
+            android:text="Continue Learning" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardContinueLearning"
+            style="@style/Widget.StudyBloom.Card.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_2xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_md">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSubjectName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subject"
+                        android:textColor="@color/primary"
+                        app:chipBackgroundColor="@color/primary_container"
+                        app:chipCornerRadius="@dimen/radius_sm" />
+
+                    <TextView
+                        android:id="@+id/tvLastActive"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                        android:text="Last active 2h ago" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvContinueTopicName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:textAppearance="@style/TextAppearance.StudyBloom.Headline"
+                    android:text="Topic Name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_lg">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                        android:text="Progress" />
+
+                    <TextView
+                        android:id="@+id/tvProgressPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                        android:text="65%" />
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressContinue"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/progress_bar_height"
+                    android:layout_marginBottom="@dimen/spacing_lg"
+                    android:progressDrawable="@drawable/progress_bar_drawable"
+                    android:max="100"
+                    android:progress="65" />
+
+                <Button
+                    android:id="@+id/btnResume"
+                    style="@style/Widget.StudyBloom.Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Resume" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Quick Start Session Button -->
+        <Button
+            android:id="@+id/btnQuickStart"
+            style="@style/Widget.StudyBloom.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:text="+ Quick Start Session" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

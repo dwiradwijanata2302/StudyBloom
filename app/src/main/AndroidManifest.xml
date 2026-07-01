@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_studybloom_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBloom">
+
+        <!-- SPLASH SCREEN (Entry Point) -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.StudyBloom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- HOME ACTIVITY (Main) -->
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="true" />
+
+        <!-- SUBJECT ACTIVITIES -->
         <activity android:name=".ui.subject.SubjectActivity" />
         <activity android:name=".ui.subject.SubjectFormActivity" />
+
+        <!-- TOPIC ACTIVITIES -->
         <activity android:name=".ui.topic.TopicActivity" />
         <activity android:name=".ui.topic.TopicFormActivity" />
+
+        <!-- SESSION ACTIVITIES -->
         <activity android:name=".ui.session.StudySessionActivity" />
         <activity android:name=".ui.session.BreakSessionActivity" />
+
+        <!-- STATISTICS ACTIVITY -->
         <activity android:name=".ui.statistics.StatisticsActivity" />
+
     </application>
 
 </manifest>

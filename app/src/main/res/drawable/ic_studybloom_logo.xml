@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Flower petals -->
+    <path
+        android:fillColor="#7A0C2E"
+        android:pathData="M100,20 Q120,40 120,70 Q100,60 100,40 Z" />
+    <path
+        android:fillColor="#9C4A5A"
+        android:pathData="M100,20 Q80,40 80,70 Q100,60 100,40 Z" />
+    <path
+        android:fillColor="#7A0C2E"
+        android:pathData="M140,60 Q150,80 140,110 Q120,90 110,80 Z" />
+    <path
+        android:fillColor="#9C4A5A"
+        android:pathData="M60,60 Q50,80 60,110 Q80,90 90,80 Z" />
+    <path
+        android:fillColor="#7A0C2E"
+        android:pathData="M120,130 Q100,150 70,150 Q90,140 100,120 Z" />
+    <path
+        android:fillColor="#9C4A5A"
+        android:pathData="M80,130 Q100,150 130,150 Q110,140 100,120 Z" />
+
+    <!-- Center circle -->
+    <circle
+        android:cx="100"
+        android:cy="85"
+        android:r="15"
+        android:fillColor="#7A0C2E" />
+
+    <!-- Book lines -->
+    <path
+        android:strokeColor="#7A0C2E"
+        android:strokeWidth="4"
+        android:pathData="M70,155 Q100,175 130,155" />
+    <path
+        android:strokeColor="#7A0C2E"
+        android:strokeWidth="4"
+        android:pathData="M75,165 Q100,180 125,165" />
+</vector>
