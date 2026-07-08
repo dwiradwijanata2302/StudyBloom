@@ -36,7 +36,7 @@
             android:paddingHorizontal="@dimen/screen_margin_horizontal"
             android:paddingTop="@dimen/spacing_lg">
 
-            <!-- Card Progress Atas -->
+            <!-- Card Header: Study Progress -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.StudyBloom.Card"
                 android:layout_width="match_parent"
@@ -56,11 +56,12 @@
                         android:gravity="center_vertical">
 
                         <TextView
+                            android:id="@+id/tvHeaderTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textAppearance="@style/TextAppearance.StudyBloom.Title"
-                            android:text="Course Progress" />
+                            android:text="Study Progress" />
 
                         <TextView
                             android:id="@+id/tvTotalTopics"
@@ -75,35 +76,45 @@
 
                     </LinearLayout>
 
+                    <!-- Menampilkan Total Waktu Belajar, Bukan Persentase -->
+                    <TextView
+                        android:id="@+id/tvProgressPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_md"
+                        android:layout_gravity="end"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                        android:text="Total Study Time: 0m" />
+
+                    <!-- ProgressBar disembunyikan agar tidak ada persentase visual -->
                     <ProgressBar
                         android:id="@+id/progressCourse"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/progress_bar_height"
-                        android:layout_marginTop="@dimen/spacing_md"
+                        android:layout_marginTop="@dimen/spacing_sm"
                         android:progressDrawable="@drawable/progress_bar_drawable"
-                        android:max="100"
-                        android:progress="0" />
-
-                    <TextView
-                        android:id="@+id/tvProgressPercent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
-                        android:layout_gravity="end"
-                        android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
-                        android:text="0% Completed" />
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- RecyclerView Topic -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTopics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:id="@+id/tvEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_2xl"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+                android:text="No topics added yet."
+                android:visibility="gone" />
 
         </LinearLayout>
 

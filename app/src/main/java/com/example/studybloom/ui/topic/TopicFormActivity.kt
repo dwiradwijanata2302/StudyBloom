@@ -38,7 +38,9 @@ class TopicFormActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Bind views
         tvFormTitle = findViewById(R.id.tvFormTitle)
@@ -57,6 +59,10 @@ class TopicFormActivity : AppCompatActivity() {
         } else {
             setupAddMode()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
     private fun setupAddMode() {

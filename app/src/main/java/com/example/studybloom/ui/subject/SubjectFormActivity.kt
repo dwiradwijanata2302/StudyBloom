@@ -1,6 +1,10 @@
 package com.example.studybloom.ui.subject
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +15,6 @@ import com.example.studybloom.viewmodel.SubjectViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 
 class SubjectFormActivity : AppCompatActivity() {
 
@@ -37,7 +38,9 @@ class SubjectFormActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         // Bind views
         tvFormTitle = findViewById(R.id.tvFormTitle)
@@ -51,12 +54,14 @@ class SubjectFormActivity : AppCompatActivity() {
         subjectId = intent.getIntExtra("SUBJECT_ID", -1)
 
         if (subjectId != -1) {
-            // Mode Edit
             setupEditMode()
         } else {
-            // Mode Tambah
             setupAddMode()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
     private fun setupAddMode() {
@@ -74,7 +79,7 @@ class SubjectFormActivity : AppCompatActivity() {
         btnSave.text = "Save Changes"
         btnDelete.visibility = View.VISIBLE
 
-        // Load data subject dari database
+        // Load data subject
         lifecycleScope.launch {
             existingSubject = subjectViewModel.getSubjectById(subjectId)
             existingSubject?.let { subject ->
@@ -96,7 +101,6 @@ class SubjectFormActivity : AppCompatActivity() {
         val name = etSubjectName.text.toString().trim()
         val description = etDescription.text.toString().trim()
 
-        // Validasi nama tidak boleh kosong
         if (name.isEmpty()) {
             tilSubjectName.error = "Subject name is required"
             return
@@ -104,32 +108,25 @@ class SubjectFormActivity : AppCompatActivity() {
         tilSubjectName.error = null
 
         if (subjectId != -1) {
-            // Mode Edit → update
-            val updatedSubject = Subject(
-                id = subjectId,
-                name = name,
-                description = description
-            )
+            val updatedSubject = Subject(id = subjectId, name = name, description = description)
             subjectViewModel.update(updatedSubject)
+            Toast.makeText(this, "Subject updated successfully", Toast.LENGTH_SHORT).show()
         } else {
-            // Mode Tambah → insert
-            val newSubject = Subject(
-                name = name,
-                description = description
-            )
+            val newSubject = Subject(name = name, description = description)
             subjectViewModel.insert(newSubject)
+            Toast.makeText(this, "Subject created successfully", Toast.LENGTH_SHORT).show()
         }
-
         finish()
     }
 
     private fun showDeleteConfirmation() {
         AlertDialog.Builder(this)
             .setTitle("Delete Subject")
-            .setMessage("Are you sure you want to delete this subject? All topics inside will also be deleted.")
+            .setMessage("Are you sure? All topics inside will also be deleted.")
             .setPositiveButton("Delete") { _, _ ->
                 existingSubject?.let { subject ->
                     subjectViewModel.delete(subject)
+                    Toast.makeText(this, "Subject deleted", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }

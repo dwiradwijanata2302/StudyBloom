@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextAppearance="@style/TextAppearance.StudyBloom.Title"
+        app:titleTextColor="@color/primary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSubjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_2xl"
+            android:text="Subject"
+            android:textColor="@color/primary"
+            app:chipBackgroundColor="@color/primary_container"
+            app:chipCornerRadius="@dimen/radius_sm" />
+
+        <TextView
+            android:id="@+id/tvTopicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:textAppearance="@style/TextAppearance.StudyBloom.Headline"
+            android:text="Topic Name" />
+
+        <TextView
+            android:id="@+id/tvSessionInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_3xl"
+            android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+            android:text="Session 1 of 4" />
+
+        <!-- Timer Circle -->
+        <FrameLayout
+            android:layout_width="@dimen/timer_circle_size"
+            android:layout_height="@dimen/timer_circle_size"
+            android:layout_marginBottom="@dimen/spacing_3xl">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/spacing_md"
+                style="@style/Widget.StudyBloom.Card.Large"
+                app:strokeWidth="4dp"
+                app:strokeColor="@color/primary_container">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvTimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Timer"
+                        android:text="25:00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_md"
+                        android:textAppearance="@style/TextAppearance.StudyBloom.Label"
+                        android:text="FOCUS" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.StudyBloom.Body.Medium"
+            android:text="Timer is running. Cannot be paused or skipped." />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,11 +11,10 @@ import com.example.studybloom.data.entity.Subject
 
 class SubjectAdapter(
     private var subjects: List<Subject>,
-    private val onItemClick: (Subject) -> Unit
+    private val onItemClick: (Subject) -> Unit,
+    private val onItemLongClick: (Subject) -> Unit
 ) : RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>() {
 
-    // Data tambahan untuk progress tiap subject
-    // key: subjectId, value: Pair(completedTopics, totalTopics)
     private var progressMap: Map<Int, Pair<Int, Int>> = emptyMap()
 
     inner class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,38 +32,36 @@ class SubjectAdapter(
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
         val subject = subjects[position]
-
-        // Tampilkan nama subject
         holder.tvSubjectName.text = subject.name
 
-        // Ambil data progress dari progressMap
+        // 2. Perubahan Logika UI Subject: Menampilkan jumlah topik
         val progress = progressMap[subject.id]
-        val completed = progress?.first ?: 0
         val total = progress?.second ?: 0
+        holder.tvTopicsProgress.text = "$total Topics"
 
-        // Hitung persentase
-        val percent = if (total > 0) (completed * 100 / total) else 0
+        // 2. Perubahan Logika UI Subject: Hapus tampilan persentase dan ProgressBar
+        holder.tvProgressPercent.visibility = View.GONE
+        holder.progressBar.visibility = View.GONE
 
-        // Tampilkan progress
-        holder.tvTopicsProgress.text = "$completed of $total topics completed"
-        holder.tvProgressPercent.text = "$percent%"
-        holder.progressBar.progress = percent
-
-        // Klik item → buka form edit
+        // Klik biasa -> Buka daftar topik
         holder.itemView.setOnClickListener {
             onItemClick(subject)
+        }
+
+        // Klik lama -> EDIT / HAPUS SUBJECT
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick(subject)
+            true
         }
     }
 
     override fun getItemCount(): Int = subjects.size
 
-    // Dipanggil saat data subject berubah
     fun updateList(newList: List<Subject>) {
         subjects = newList
         notifyDataSetChanged()
     }
 
-    // Dipanggil saat data progress berubah
     fun updateProgress(newProgressMap: Map<Int, Pair<Int, Int>>) {
         progressMap = newProgressMap
         notifyDataSetChanged()

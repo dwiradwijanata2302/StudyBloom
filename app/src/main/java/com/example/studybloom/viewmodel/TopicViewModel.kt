@@ -1,10 +1,7 @@
 package com.example.studybloom.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.studybloom.data.database.AppDatabase
 import com.example.studybloom.data.entity.Topic
 import com.example.studybloom.data.repository.TopicRepository
@@ -13,10 +10,14 @@ import kotlinx.coroutines.launch
 class TopicViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: TopicRepository
-    private val _topics = MutableLiveData<LiveData<List<Topic>>>()
+    
+    // Gunakan subjectId sebagai trigger
+    private val _currentSubjectId = MutableLiveData<Int>()
 
-    var topics: LiveData<List<Topic>> = MutableLiveData()
-        private set
+    // topics akan otomatis update setiap kali _currentSubjectId berubah
+    val topics: LiveData<List<Topic>> = _currentSubjectId.switchMap { id ->
+        repository.getTopicsBySubjectId(id)
+    }
 
     init {
         val topicDao = AppDatabase.getInstance(application).topicDao()
@@ -24,7 +25,7 @@ class TopicViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadTopics(subjectId: Int) {
-        topics = repository.getTopicsBySubjectId(subjectId)
+        _currentSubjectId.value = subjectId
     }
 
     fun insert(topic: Topic) = viewModelScope.launch {

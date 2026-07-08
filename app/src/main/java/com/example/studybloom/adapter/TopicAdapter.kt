@@ -12,8 +12,8 @@ import com.example.studybloom.data.entity.Topic
 
 class TopicAdapter(
     private var topics: List<Topic>,
-    private val onItemClick: (Topic) -> Unit,
-    private val onStartSession: (Topic) -> Unit
+    private val onItemClick: (Topic) -> Unit, // Sekarang digunakan untuk Edit (Long Click)
+    private val onStartSession: (Topic) -> Unit // Sekarang digunakan untuk Start (Klik Biasa)
 ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     // key: topicId, value: total durasi belajar (menit)
@@ -36,42 +36,35 @@ class TopicAdapter(
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
         val topic = topics[position]
 
-        // Tampilkan nama topic
         holder.tvTopicName.text = topic.name
 
         // Ambil durasi total dari durationMap
-        val totalDuration = durationMap[topic.id] ?: 0
+        val totalDurationMinutes = durationMap[topic.id] ?: 0
+        val hours = totalDurationMinutes / 60
+        val minutes = totalDurationMinutes % 60
 
-        // Tampilkan durasi
-        holder.tvTopicDuration.text = if (totalDuration > 0) "${totalDuration}m" else "0m"
+        // 3. UI Topic: Ganti keterangan status menjadi "Time Spent" dan tampilkan akumulasi durasi
+        holder.tvTopicStatus.text = "Time Spent"
+        holder.tvTopicDuration.text = if (hours > 0) "${hours}h ${minutes}m" else "${minutes}m"
 
-        // Set status berdasarkan completed dan durasi
-        when {
-            topic.completed -> {
-                holder.ivTopicStatus.setImageResource(R.drawable.ic_topic_completed)
-                holder.tvTopicStatus.text = "Completed"
-                holder.progressTopic.progress = 100
-            }
-            totalDuration > 0 -> {
-                holder.ivTopicStatus.setImageResource(R.drawable.ic_topic_in_progress)
-                holder.tvTopicStatus.text = "In Progress"
-                holder.progressTopic.progress = 50
-            }
-            else -> {
-                holder.ivTopicStatus.setImageResource(R.drawable.ic_topic_not_started)
-                holder.tvTopicStatus.text = "Not Started"
-                holder.progressTopic.progress = 0
-            }
+        // 3. UI Topic: Sembunyikan ProgressBar pada item topik
+        holder.progressTopic.visibility = View.GONE
+
+        // Icon tetap sebagai visual status
+        if (topic.completed) {
+            holder.ivTopicStatus.setImageResource(R.drawable.ic_topic_completed)
+        } else {
+            holder.ivTopicStatus.setImageResource(R.drawable.ic_topic_in_progress)
         }
 
-        // Klik item → buka form edit
+        // 4. Navigasi: Klik biasa untuk MULAI sesi (lebih user-friendly)
         holder.itemView.setOnClickListener {
-            onItemClick(topic)
+            onStartSession(topic)
         }
 
-        // Long click → mulai sesi belajar
+        // 4. Navigasi: Klik lama untuk EDIT topik
         holder.itemView.setOnLongClickListener {
-            onStartSession(topic)
+            onItemClick(topic)
             true
         }
     }
