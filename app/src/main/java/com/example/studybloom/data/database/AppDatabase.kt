@@ -15,7 +15,7 @@ import com.example.studybloom.data.entity.Topic
 
 @Database(
     entities = [Subject::class, Topic::class, StudySession::class, Streak::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
